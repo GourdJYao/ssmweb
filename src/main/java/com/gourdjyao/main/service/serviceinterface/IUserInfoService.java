@@ -1,5 +1,8 @@
 package com.gourdjyao.main.service.serviceinterface;
 
+import com.gourdjyao.main.entry.UserInfo;
+
 public interface IUserInfoService {
-    void login(String username,String password);
+    UserInfo login(com.gourdjyao.main.http.bean.UserInfo userInfo) throws Exception;
+    void register(UserInfo userInfo) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.gourdjyao.main.entry;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserInfo implements Serializable {
     private static final long serialVersionUID = -172165886721764444L;
@@ -10,7 +11,10 @@ public class UserInfo implements Serializable {
     private String nickname;
     private String address;
     private String telphone;
-    private long createdatetime;
+    private int sex;
+    private String email;
+    private String token;
+    private long createdatetime = new Date().getTime();
 
     public int getId() {
         return id;
@@ -66,5 +70,29 @@ public class UserInfo implements Serializable {
 
     public void setCreatedatetime(long createdatetime) {
         this.createdatetime = createdatetime;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

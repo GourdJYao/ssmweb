@@ -2,10 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户注册</title>
 </head>
 <script src = "../js/jquery-3.3.1.js"></script>
+<script src = "../js/jsonutils.js"></script>
+<script src = "../js/register.js"></script>
+<link rel="stylesheet" href="../css/register.css" type="text/css" />
 <body>
-
+    <table id="table_body">
+        <tr>
+            <td>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</td>
+            <td><input name = "username" type="text"/></td>
+            <td style="color:red;">*</td>
+        </tr>
+        <tr>
+            <td>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+            <td><input name = "password" type="password"/></td>
+            <td style="color:red;">*</td>
+        </tr>
+        <tr>
+            <td>昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</td>
+            <td><input name = "nickname" type="text"/></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</td>
+            <td>
+                <label class="single"><input type="radio" id="male" name="sex" value="0" checked = "checked"/>男</label>
+                <label class="single"><input type="radio" id="female" name="sex" value="1" />女</label>
+                <label class="single"><input type="radio" id="secret" name="sex" value="2" />保密</label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>手机号码：</td>
+            <td><input name = "telphone" type="text"/></td>
+            <td style="color:red;">*</td>
+        </tr>
+        <tr>
+            <td>电子邮箱：</td>
+            <td><input name = "email" type="text"/></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2">
+                <input name = "submit" type="button" value="提交" onclick="submit();"/>&nbsp;&nbsp;
+                <input name = "reset" type="button" value="重置" onclick="reset();"/>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

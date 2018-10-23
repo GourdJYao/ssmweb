@@ -15,4 +15,6 @@ public interface UserInfoMapper {
     UserInfo selectUserById(int id) throws Exception;
 
     List<UserInfo> selectAllUser() throws Exception;
+
+    UserInfo selectUserByUserName(com.gourdjyao.main.http.bean.UserInfo userInfo) throws Exception;
 }

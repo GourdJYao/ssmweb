@@ -11,6 +11,9 @@
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="telphone" jdbcType="VARCHAR" property="telphone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="token" jdbcType="VARCHAR" property="token"/>
         <result column="createdatetime" jdbcType="BIGINT" property="createdatetime"/>
     </resultMap>
 
@@ -22,6 +25,21 @@
         nickname,
         address,
         telphone,
+        email,
+        sex,
+        token,
+        createdatetime
+    </sql>
+
+    <sql id="INSERT_SQL">
+        username,
+        password,
+        nickname,
+        address,
+        telphone,
+        email,
+        sex,
+        token,
         createdatetime
     </sql>
 
@@ -36,6 +54,14 @@
         select
         <include refid="SELECT_SQL"/>
         from t_user_info where id = #{id}
+    </select>
+
+    <select id="selectUserByUserName"
+            resultMap="UserInfo" parameterType="com.gourdjyao.main.http.bean.UserInfo">
+        <!-- 这里和普通的sql 查询语句差不多，对于只有一个查询条件后面的 #{id}表示占位符，里面不一定要写pid,写啥都可以，但是不要空着；如果有多个查询条件，则要写pojo类里面的属性 -->
+        select
+        <include refid="SELECT_SQL"/>
+        from t_user_info where username = #{username} AND password=#{password}
     </select>
 
     <!-- 查询t_user_info 表所有数据 -->
@@ -55,6 +81,9 @@
         nickname=#{nickname},
         address=#{address},
         telphone=#{telphone},
+        email=#{email},
+        sex=#{sex},
+        token=#{token},
         createdatetime=#{createdatetime}
         where id = #{id}
     </update>
@@ -63,11 +92,11 @@
     <insert id="insertUser" parameterType="com.gourdjyao.main.entry.UserInfo">
         insert into t_user_info
         (
-        <include refid="SELECT_SQL"/>
+        <include refid="INSERT_SQL"/>
         )
         values
         (
-        #{username},#{password},#{nickname},#{address},#{telphone},#{createdatetime}
+        #{username},#{password},#{nickname},#{address},#{telphone},#{email},#{sex},#{token},#{createdatetime}
         )
     </insert>
 
