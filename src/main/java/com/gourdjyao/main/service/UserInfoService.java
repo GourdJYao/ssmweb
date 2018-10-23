@@ -19,7 +19,7 @@ public class UserInfoService implements IUserInfoService {
         if (userInfo != null) {
             String uuid = UUID.randomUUID().toString();
             userInfo.setToken(uuid);
-            userInfoMapper.updateUser(userInfo, userInfo.getId());
+            userInfoMapper.updateUser(userInfo);
         }
         return userInfo;
     }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserInfoMapper {
     int insertUser(UserInfo user) throws Exception;
 
-    int updateUser(UserInfo user, int id) throws Exception;
+    int updateUser(UserInfo user) throws Exception;
 
     int deleteUser(int id) throws Exception;
 
