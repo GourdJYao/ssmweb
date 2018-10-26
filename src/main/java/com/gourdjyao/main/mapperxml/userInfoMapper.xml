@@ -15,20 +15,40 @@
         <result column="sex" jdbcType="INTEGER" property="sex"/>
         <result column="token" jdbcType="VARCHAR" property="token"/>
         <result column="createdatetime" jdbcType="BIGINT" property="createdatetime"/>
+        <collection property="busLineInfoList" ofType="com.gourdjyao.main.entry.BusLineInfo">
+            <id column="buslineid" jdbcType="INTEGER" property="buslineid"/>
+            <result column="destinationname" jdbcType="VARCHAR" property="destinationname"/>
+            <result column="destinationlat" jdbcType="FLOAT" property="destinationlat"/>
+            <result column="destinationlon" jdbcType="FLOAT" property="destinationlon"/>
+            <result column="originname" jdbcType="VARCHAR" property="originname"/>
+            <result column="originlat" jdbcType="FLOAT" property="originlat"/>
+            <result column="originlon" jdbcType="FLOAT" property="originlon"/>
+            <result column="busname" jdbcType="VARCHAR" property="busname"/>
+            <result column="createtime" jdbcType="BIGINT" property="createtime"/>
+        </collection>
     </resultMap>
 
 
     <sql id="SELECT_SQL">
-        id,
-        username,
-        password,
-        nickname,
-        address,
-        telphone,
-        email,
-        sex,
-        token,
-        createdatetime
+        userinfo.id,
+        userinfo.username,
+        userinfo.password,
+        userinfo.nickname,
+        userinfo.address,
+        userinfo.telphone,
+        userinfo.email,
+        userinfo.sex,
+        userinfo.token,
+        userinfo.createdatetime,
+        busline.buslineid,
+        busline.destinationname,
+        busline.destinationlat,
+        busline.destinationlon,
+        busline.originname,
+        busline.originlat,
+        busline.originlon,
+        busline.busname,
+        busline.createtime
     </sql>
 
     <sql id="INSERT_SQL">
@@ -53,7 +73,7 @@
         <!-- 这里和普通的sql 查询语句差不多，对于只有一个查询条件后面的 #{id}表示占位符，里面不一定要写pid,写啥都可以，但是不要空着；如果有多个查询条件，则要写pojo类里面的属性 -->
         select
         <include refid="SELECT_SQL"/>
-        from t_user_info where id = #{id}
+        from t_user_info AS userinfo LEFT JOIN t_busline_info AS busline ON userinfo.id=busline.userid where userinfo.id = #{id} AND userinfo.id = busline.userid
     </select>
 
     <select id="selectUserByUserName"
@@ -61,14 +81,14 @@
         <!-- 这里和普通的sql 查询语句差不多，对于只有一个查询条件后面的 #{id}表示占位符，里面不一定要写pid,写啥都可以，但是不要空着；如果有多个查询条件，则要写pojo类里面的属性 -->
         select
         <include refid="SELECT_SQL"/>
-        from t_user_info where username = #{username} AND password=#{password}
+        from t_user_info AS userinfo LEFT JOIN t_busline_info AS busline ON userinfo.id=busline.userid where userinfo.username = #{username} AND userinfo.password=#{password}
     </select>
 
     <!-- 查询t_user_info 表所有数据 -->
     <select id="selectAllUser" resultMap="UserInfo">
         select
         <include refid="SELECT_SQL"/>
-        from t_user_info
+        from t_user_info AS userinfo LEFT JOIN t_busline_info AS busline ON userinfo.id=busline.userid
     </select>
 
     <!-- 根据id更新数据 -->

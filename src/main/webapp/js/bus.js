@@ -1,20 +1,17 @@
-function login() {
-    if ($.trim($("[name=username]").val()) == '') {
-        alert("用户名不能为空~");
-        return;
-    }
-    if ($.trim($("[name=password]").val()) == '') {
-        alert("密码不能为空~");
-        return;
-    }
-    var jsonString = toJson("MSG_LOGIN_REQ",
+function savebusinfo() {
+    var jsonString = toJson("MSG_SAVE_BUSLINE_REQ",
         "v1.0.0",
-        $("[name=username]"),
-        $("[name=password]")
+        $("[name=busname]"),
+        $("[name=originname]"),
+        $("[name=originlat]"),
+        $("[name=originlon]"),
+        $("[name=destinationname]"),
+        $("[name=destinationlat]"),
+        $("[name=destinationlon]")
     );
     alert(JSON.stringify(jsonString));
     $.ajax({
-            url:"/gourdjyaoweb/login",
+            url:"/gourdjyaoweb/bus/savebuslineinfo",
             type: "POST",
             datatype: "json",
             contentType: "application/json; charset=utf-8",
@@ -32,10 +29,10 @@ function login() {
                                     return true;
                                 }
                                 if (tempitems != null && tempitems == 0) {
-                                    alert("登录成功！");
+                                    alert("增加成功！");
                                     $(location).attr('href', '/gourdjyaoweb/bus/bus_info.html');
                                 } else {
-                                    alert("登录失败！");
+                                    alert("增加失败！");
                                 }
                             });
                         }

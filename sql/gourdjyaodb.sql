@@ -11,11 +11,31 @@
  Target Server Version : 50641
  File Encoding         : 65001
 
- Date: 23/10/2018 17:50:41
+ Date: 26/10/2018 17:56:47
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for t_busline_info
+-- ----------------------------
+DROP TABLE IF EXISTS `t_busline_info`;
+CREATE TABLE `t_busline_info`  (
+  `buslineid` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL COMMENT '跟用户ID关联',
+  `destinationname` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `destinationlat` float(255, 0) DEFAULT NULL,
+  `destinationlon` float(255, 0) DEFAULT NULL,
+  `originname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `originlat` float(255, 0) DEFAULT NULL,
+  `originlon` float(255, 0) DEFAULT NULL,
+  `busname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `createtime` bigint(255) DEFAULT NULL,
+  PRIMARY KEY (`buslineid`) USING BTREE,
+  INDEX `t_userinfo_busline_pk`(`userid`) USING BTREE,
+  CONSTRAINT `t_userinfo_busline_pk` FOREIGN KEY (`userid`) REFERENCES `t_user_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for t_user_info
@@ -38,6 +58,6 @@ CREATE TABLE `t_user_info`  (
 -- ----------------------------
 -- Records of t_user_info
 -- ----------------------------
-INSERT INTO `t_user_info` VALUES (10, 'yaojian', 'yaojian', 'yaojian', NULL, '18725756569', 'yaojian27272727@sina.com', 0, NULL, 1540287325101);
+INSERT INTO `t_user_info` VALUES (10, 'yaojian', 'yaojian', 'yaojian', NULL, '18725756569', 'yaojian27272727@sina.com', 0, '996888a4-b03b-4cf7-bbf3-04a81202360f', 1540287325101);
 
 SET FOREIGN_KEY_CHECKS = 1;

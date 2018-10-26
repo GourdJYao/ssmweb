@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>公交路线维护</title>
+</head>
+<script src = "../js/jquery-3.3.1.js"></script>
+<script src = "../js/jsonutils.js"></script>
+<script src = "../js/bus.js"></script>
+<body>
+<table id="table_body">
+    <tr>
+        <td>公交路线：</td>
+        <td><input name = "busname" type="text"/></td>
+    </tr>
+    <tr>
+        <td>起始站</td>
+        <td><input name = "originname" type="text"/></td>
+    </tr>
+    <tr>
+        <td>起始站纬度坐标</td>
+        <td><input name = "originlat" type="text"/></td>
+    </tr>
+    <tr>
+        <td>起始站经度坐标</td>
+        <td><input name = "originlon" type="text"/></td>
+    </tr>
+    <tr>
+        <td>终点站名称</td>
+        <td><input name = "destinationname" type="text"/></td>
+    </tr>
+    <tr>
+        <td>终点站纬度坐标</td>
+        <td><input name = "destinationlat" type="text"/></td>
+    </tr>
+    <tr>
+        <td>终点站经度坐标</td>
+        <td><input name = "destinationlon" type="text"/></td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2">
+            <input name = "submit" type="button" value="提交" onclick="savebusinfo();"/>&nbsp;&nbsp;
+        </td>
+    </tr>
+</table>
+</body>
+</html>

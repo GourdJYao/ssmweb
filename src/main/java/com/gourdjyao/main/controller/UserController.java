@@ -1,12 +1,12 @@
 package com.gourdjyao.main.controller;
 
+import com.gourdjyao.main.entry.BusLineInfo;
 import com.gourdjyao.main.entry.UserInfo;
+import com.gourdjyao.main.http.request.BusLineInfoRequest;
 import com.gourdjyao.main.http.request.LoginRequest;
 import com.gourdjyao.main.http.request.RegisterRequest;
-import com.gourdjyao.main.http.response.BaseResult;
-import com.gourdjyao.main.http.response.LoginResponse;
-import com.gourdjyao.main.http.response.LoginResult;
-import com.gourdjyao.main.http.response.RegisterResponse;
+import com.gourdjyao.main.http.response.*;
+import com.gourdjyao.main.service.serviceinterface.IBusLineInfoService;
 import com.gourdjyao.main.service.serviceinterface.IUserInfoService;
 import com.gourdjyao.main.http.utils.ResultCodeUtils;
 import com.gourdjyao.main.http.utils.ResultUtils;
@@ -24,6 +24,8 @@ import static com.gourdjyao.main.http.utils.ResultUtils.RESPONSE_MESSAGE_TYPE_MA
 public class UserController {
     @Autowired
     IUserInfoService userInfoService;
+    @Autowired
+    IBusLineInfoService busLineInfoService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public @ResponseBody

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gourdjyao.main.mapper.BusLineInfoMapper">
+
+    <resultMap id="BusLineInfo" type="com.gourdjyao.main.entry.BusLineInfo">
+        <id column="buslineid" jdbcType="INTEGER" property="buslineid"/>
+        <result column="destinationname" jdbcType="VARCHAR" property="destinationname"/>
+        <result column="destinationlat" jdbcType="FLOAT" property="destinationlat"/>
+        <result column="destinationlon" jdbcType="FLOAT" property="destinationlon"/>
+        <result column="originname" jdbcType="VARCHAR" property="originname"/>
+        <result column="originlat" jdbcType="FLOAT" property="originlat"/>
+        <result column="originlon" jdbcType="FLOAT" property="originlon"/>
+        <result column="busname" jdbcType="VARCHAR" property="busname"/>
+        <result column="createtime" jdbcType="BIGINT" property="createtime"/>
+        <association property="userInfo" javaType="com.gourdjyao.main.entry.UserInfo">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <result column="username" jdbcType="VARCHAR" property="username"/>
+            <result column="password" jdbcType="VARCHAR" property="password"/>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+            <result column="address" jdbcType="VARCHAR" property="address"/>
+            <result column="telphone" jdbcType="VARCHAR" property="telphone"/>
+            <result column="email" jdbcType="VARCHAR" property="email"/>
+            <result column="sex" jdbcType="INTEGER" property="sex"/>
+            <result column="token" jdbcType="VARCHAR" property="token"/>
+            <result column="createdatetime" jdbcType="BIGINT" property="createdatetime"/>
+        </association>
+    </resultMap>
+
+
+    <sql id="SELECT_SQL">
+        userinfo.id,
+        userinfo.username,
+        userinfo.password,
+        userinfo.nickname,
+        userinfo.address,
+        userinfo.telphone,
+        userinfo.email,
+        userinfo.sex,
+        userinfo.token,
+        userinfo.createdatetime,
+        busline.buslineid,
+        busline.destinationname,
+        busline.destinationlat,
+        busline.destinationlon,
+        busline.originname,
+        busline.originlat,
+        busline.originlon,
+        busline.busname,
+        busline.createtime
+    </sql>
+
+    <sql id="INSERT_SQL">
+        userid,
+        destinationname,
+        destinationlat,
+        destinationlon,
+        originname,
+        originlat,
+        originlon,
+        busname,
+        createdatetime
+    </sql>
+
+    <!-- 根据 pid 查询 t_user_info 表中的数据
+         id:唯一标识符，此文件中的id值不能重复
+         resultType:返回值类型，一条数据库记录也就对应实体类的一个对象
+         parameterType:参数类型，也就是查询条件的类型
+     -->
+    <select id="selectBusLineInfoById"
+            resultMap="BusLineInfo" parameterType="int">
+        <!-- 这里和普通的sql 查询语句差不多，对于只有一个查询条件后面的 #{id}表示占位符，里面不一定要写pid,写啥都可以，但是不要空着；如果有多个查询条件，则要写pojo类里面的属性 -->
+        select
+        <include refid="SELECT_SQL"/>
+        from t_busline_info AS busline,t_user_info AS userinfo where busline.id = #{id} AND busline.userid = userinfo.id
+    </select>
+
+    <select id="selectBusLineInfoByUserId"
+            resultMap="BusLineInfo" parameterType="int">
+        <!-- 这里和普通的sql 查询语句差不多，对于只有一个查询条件后面的 #{id}表示占位符，里面不一定要写pid,写啥都可以，但是不要空着；如果有多个查询条件，则要写pojo类里面的属性 -->
+        select
+        <include refid="SELECT_SQL"/>
+        from t_busline_info AS busline,t_user_info AS userinfo where userinfo.id = #{id} AND busline.userid =
+        userinfo.id
+    </select>
+
+    <!-- 根据id更新数据 -->
+    <update id="updateBusLineInfo" parameterType="com.gourdjyao.main.entry.BusLineInfo">
+        update
+        t_busline_info
+        set
+        userid=#{userInfo.id},
+        destinationname=#{destinationname},
+        destinationlat=#{destinationlat},
+        destinationlon=#{destinationlon},
+        originname=#{originname},
+        originlat=#{originlat},
+        originlon=#{originlon},
+        busname=#{busname},
+        createtime=#{createtime}
+        where id = #{id}
+    </update>
+
+    <!-- 向 t_user_info 表插入一条数据 -->
+    <insert id="insertBusLineInfo" parameterType="com.gourdjyao.main.entry.BusLineInfo">
+        insert into t_user_info
+        (
+        <include refid="INSERT_SQL"/>
+        )
+        values
+        (
+        #{userInfo.id},#{username},#{password},#{nickname},#{address},#{telphone},#{email},#{sex},#{token},#{createtime}
+        )
+    </insert>
+
+    <!-- 根据 pid 删除数据 -->
+    <delete id="deleteBusLineInfo" parameterType="int">
+        delete from t_busline_info where id=#{id}
+    </delete>
+
+</mapper>

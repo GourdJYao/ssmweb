@@ -2,6 +2,7 @@ package com.gourdjyao.main.entry;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class UserInfo implements Serializable {
     private static final long serialVersionUID = -172165886721764444L;
@@ -15,6 +16,7 @@ public class UserInfo implements Serializable {
     private String email;
     private String token;
     private long createdatetime = new Date().getTime();
+    private List<BusLineInfo> busLineInfoList;
 
     public int getId() {
         return id;
@@ -94,5 +96,13 @@ public class UserInfo implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<BusLineInfo> getBusLineInfoList() {
+        return busLineInfoList;
+    }
+
+    public void setBusLineInfoList(List<BusLineInfo> busLineInfoList) {
+        this.busLineInfoList = busLineInfoList;
     }
 }
