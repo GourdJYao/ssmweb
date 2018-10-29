@@ -60,7 +60,7 @@
         originlat,
         originlon,
         busname,
-        createdatetime
+        createtime
     </sql>
 
     <!-- 根据 pid 查询 t_user_info 表中的数据
@@ -104,13 +104,13 @@
 
     <!-- 向 t_user_info 表插入一条数据 -->
     <insert id="insertBusLineInfo" parameterType="com.gourdjyao.main.entry.BusLineInfo">
-        insert into t_user_info
+        insert into t_busline_info
         (
         <include refid="INSERT_SQL"/>
         )
         values
         (
-        #{userInfo.id},#{username},#{password},#{nickname},#{address},#{telphone},#{email},#{sex},#{token},#{createtime}
+        #{userInfo.id},#{destinationname},#{destinationlat},#{destinationlon},#{originname},#{originlat},#{originlon},#{busname},#{createtime}
         )
     </insert>
 

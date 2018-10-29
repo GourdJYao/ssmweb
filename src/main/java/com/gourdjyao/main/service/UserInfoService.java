@@ -14,13 +14,19 @@ public class UserInfoService implements IUserInfoService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo login(com.gourdjyao.main.http.bean.UserInfo userInfoRequst) throws Exception {
+    public UserInfo login(UserInfo userInfoRequst) throws Exception {
         UserInfo userInfo = userInfoMapper.selectUserByUserName(userInfoRequst);
         if (userInfo != null) {
             String uuid = UUID.randomUUID().toString();
             userInfo.setToken(uuid);
             userInfoMapper.updateUser(userInfo);
         }
+        return userInfo;
+    }
+
+    @Override
+    public UserInfo selectUserInfo(String token) throws Exception {
+        UserInfo userInfo = userInfoMapper.selectUserByToken(token);
         return userInfo;
     }
 

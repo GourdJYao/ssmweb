@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Service("userInfoService")
+@Service("busLineInfoService")
 public class BusLineInfoService implements IBusLineInfoService {
     @Autowired
     private BusLineInfoMapper busLineInfoMapper;

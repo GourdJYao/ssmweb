@@ -1,6 +1,7 @@
 package com.gourdjyao.main.http.request;
 
-import com.gourdjyao.main.http.bean.UserInfo;
+
+import com.gourdjyao.main.entry.UserInfo;
 
 public class LoginRequest extends BaseRequest {
     public UserInfo getData() {

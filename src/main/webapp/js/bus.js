@@ -9,9 +9,12 @@ function savebusinfo() {
         $("[name=destinationlat]"),
         $("[name=destinationlon]")
     );
+    var dataJson = jsonString['data'];
+    dataJson['userInfo'] = {"token":"996888a4-b03b-4cf7-bbf3-04a81202360f"};
+    jsonString['data'] = dataJson;
     alert(JSON.stringify(jsonString));
     $.ajax({
-            url:"/gourdjyaoweb/bus/savebuslineinfo",
+            url:"/gourdjyaoweb/savebuslineinfo",
             type: "POST",
             datatype: "json",
             contentType: "application/json; charset=utf-8",
